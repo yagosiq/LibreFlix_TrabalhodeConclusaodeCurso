@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 import { useState } from "react";
 import { LayoutComponets } from "../../componets/LayoutComponets"
 
@@ -14,9 +14,39 @@ export const Register = () => {
     const [birth_date, setBirth_date] = useState("");
     const [login_user, setLogin_user] = useState("");
     
+    const handleSubmit = async (event) => {
+        console.log(email_user, pw_user);
+        event.preventDefault();
+        await axios
+          .post(
+            "https://recomenda-filmes.herokuapp.com/users",
+            JSON.stringify({
+              first_name: first_name,
+              last_name: last_name,
+              birth_date: birth_date,
+              login_user: login_user,
+              email_user: email_user,
+              pw_user: pw_user,
+            }),
+            {
+              headers: { "Content-Type": "application/json" },
+            }
+          )
+          .then((response) => {
+            // setEmail_user("")
+            // setPw_user("")
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        
+        console.log("form submitted ✅");
+      };
+
     return (
         <LayoutComponets>
-            <form className="login-form">
+            <form className="login-form" onSubmit={handleSubmit}>
 
                 <span className="login-form-title"> Criar Conta</span>
 
@@ -47,7 +77,11 @@ export const Register = () => {
                 <div className="wrap-input">
                     <input
                         className={birth_date!== "" ? "has-val input" : "input"}
-                        type="text"
+                        type="text" placeholder="" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => {
+                            if(e.target.value == ""){
+                                e.target.type = 'text'
+                            }
+                        }}
                         value={birth_date}
                         onChange={(e) => setBirth_date(e.target.value)}
                     />
