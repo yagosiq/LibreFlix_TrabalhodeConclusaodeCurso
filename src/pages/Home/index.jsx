@@ -5,6 +5,12 @@ export const Home = () => {
     return(
        <LayoutComponets>
        
+
+
+
+
+
+       
        
        </LayoutComponets>
     )
