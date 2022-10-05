@@ -35,6 +35,10 @@ export const Register = () => {
           .then((response) => {
             // setEmail_user("")
             // setPw_user("")
+            // setFirst_name("")
+            // setLast_name("")
+            // setBirth_date("")
+            // setLogin_user("")
             console.log(response);
           })
           .catch(function (error) {
@@ -78,7 +82,7 @@ export const Register = () => {
                     <input
                         className={birth_date!== "" ? "has-val input" : "input"}
                         type="text" placeholder="" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => {
-                            if(e.target.value == ""){
+                            if(e.target.value === ""){
                                 e.target.type = 'text'
                             }
                         }}
@@ -125,8 +129,8 @@ export const Register = () => {
 
                 <div className="text-center">
                     <span className="txt1">Já possui conta? </span>
-                    <Link clLinkssName="txt2" to="/login">
-                        Acessar com Email e Senha
+                    <Link clLinkssName="txt2" className="txt1" to="/login">
+                        Acessar com e-mail e senha
                     </Link>
                 </div>
             </form>

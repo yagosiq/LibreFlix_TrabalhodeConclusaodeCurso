@@ -72,7 +72,7 @@ export const Login = () => {
 
         <div className="text-center">
           <span className="txt1">Não possui conta? </span>
-          <Link clLinkssName="txt2" to="/register">
+          <Link clLinkssName="txt2" className="txt1" to="/register">
             Criar conta
           </Link>
         </div>
