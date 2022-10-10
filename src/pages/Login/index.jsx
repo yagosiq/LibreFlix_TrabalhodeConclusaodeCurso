@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
-
 import imgLogo from "../../componets/imgs/imgLogo.png";
 import { LayoutComponets } from "../../componets/LayoutComponets";
 
