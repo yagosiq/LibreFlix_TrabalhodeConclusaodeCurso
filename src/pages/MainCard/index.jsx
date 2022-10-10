@@ -1,13 +1,11 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import { useState } from "react";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
 export const MainCard = (props) => {
-  // console.log(props)
   return (
     <div>
       <Card sx={{ maxWidth: 500, backgroundColor: "#111" }}>
@@ -27,10 +25,10 @@ export const MainCard = (props) => {
             align="center"
             style={{ height: "70px" }}
           >
-            Rating: {props.movie_data[0]}
+            Title: {props.movie_data[0]}
           </Typography>
           <Typography variant="body2" color="white" style={{ height: "10px" }}>
-            Title: {props.movie_data[1]}
+            Rating: {props.movie_data[1]}
           </Typography>
         </CardContent>
         <CardActions>
