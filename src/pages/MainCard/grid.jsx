@@ -12,8 +12,7 @@ export const GridMovie = () => {
         headers: { "Content-Type": "application/json" },
       })
       .then((res) => {
-        console.log(res.data.movies)
-        handleSetMovies(res.data.movies);
+        handleSetMovies(res.data.movie_info);
       });
   }, [movies]);
 

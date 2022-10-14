@@ -13,7 +13,7 @@ export const MainCard = (props) => {
           component="img"
           alt="green iguana"
           height="400"
-          image={props.movie_data[2]}
+          image={props.movie_data.movie_img}
         />
         <CardContent>
           <Typography
@@ -25,10 +25,10 @@ export const MainCard = (props) => {
             align="center"
             style={{ height: "70px" }}
           >
-            Title: {props.movie_data[0]}
+            Title: {props.movie_data.movie_info.series_title}
           </Typography>
           <Typography variant="body2" color="white" style={{ height: "10px" }}>
-            Rating: {props.movie_data[1]}
+            Rating: {props.movie_data.movie_info.imdb_rating}
           </Typography>
         </CardContent>
         <CardActions>
