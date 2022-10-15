@@ -68,13 +68,13 @@ export const GridMovie = () => {
             </button>
           </div>
         </Grid>
-        {Object.values(movies).map((movie, i) => {
+        {Object.values(movies).map((movie, index) => {
           return (
-            <Grid item xs={3}>
+            <Grid item key={index} xs={3}>
               <MainCard movie_data={movie} />
             </Grid>
           );
-        })}
+        })} 
       </Grid>
     </div>
   );
