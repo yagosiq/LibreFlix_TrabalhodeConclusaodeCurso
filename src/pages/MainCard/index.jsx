@@ -4,6 +4,24 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { Movie } from "@mui/icons-material";
+
+function salvarFilme(){
+  const minhaLista = localStorage.getItem("@libreflix");
+
+  let filmesSalvos = JSON.parse(minhaLista) || [];
+  
+  const hasFilmes = filmesSalvos.some( (filmeSalvo) => filmeSalvo.id === Movie.id) 
+
+  if(hasFilmes){
+    alert("Este filme ja esta na sua lista");
+    return;
+  }
+
+  filmesSalvos.push(Movie);
+  localStorage.setItem("@libreflix", JSON.stringfy(filmesSalvos));
+  alert("Filme salvo com sucesso")
+}
 
 export const MainCard = (props) => {
   return (
@@ -34,6 +52,10 @@ export const MainCard = (props) => {
         <CardActions>
           <button type="submit" className="login-form-btn">
             Details
+          </button>
+          <br />
+          <button onClick={salvarFilme} className="login-form-btn">
+            Favoritos
           </button>
         </CardActions>
       </Card>
