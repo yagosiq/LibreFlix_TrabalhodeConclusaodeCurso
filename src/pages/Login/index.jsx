@@ -13,7 +13,7 @@ export const Login = () => {
     event.preventDefault();
     await axios
       .post(
-        "https://recomenda-filmes.herokuapp.com/login",
+        "https://localhost:3000",
         JSON.stringify({
           email_user: email_user,
           pw_user: pw_user,

@@ -4,26 +4,32 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Movie } from "@mui/icons-material";
+import { toast } from "react-toastify";
 
-function salvarFilme(){
-  const minhaLista = localStorage.getItem("@libreflix");
 
-  let filmesSalvos = JSON.parse(minhaLista) || [];
-  
-  const hasFilmes = filmesSalvos.some( (filmeSalvo) => filmeSalvo.id === Movie.id) 
-
-  if(hasFilmes){
-    alert("Este filme ja esta na sua lista");
-    return;
-  }
-
-  filmesSalvos.push(Movie);
-  localStorage.setItem("@libreflix", JSON.stringfy(filmesSalvos));
-  alert("Filme salvo com sucesso")
-}
 
 export const MainCard = (props) => {
+
+  function salvarFilme() {
+    const minhaLista = localStorage.getItem("@libreflix");
+  
+    let filmesSalvos = JSON.parse(minhaLista) || [];
+  
+    const hasFilmes = filmesSalvos.some( (filmeSalvo) => filmeSalvo.movie_data === props.movie_data)
+  
+    if (hasFilmes) {
+     toast.warn("Este filme já esta na sua lista");
+      return;
+    }
+  
+    filmesSalvos.push(props.movie_data);
+    localStorage.setItem("@libreflix", JSON.stringify(filmesSalvos));
+    toast.success("Filme salvo com sucesso")
+    }
+
+
+
+
   return (
     <div>
       <Card sx={{ maxWidth: 500, backgroundColor: "#111" }}>
@@ -36,7 +42,6 @@ export const MainCard = (props) => {
         <CardContent>
           <Typography
             gutterBottom
-            
             component="div"
             color="white"
             padding="1rem"
@@ -48,16 +53,19 @@ export const MainCard = (props) => {
           <Typography variant="body2" color="white" style={{ height: "10px" }}>
             Rating: {props.movie_data[1]}
           </Typography>
-        </CardContent>
-        <CardActions>
-          <button type="submit" className="login-form-btn">
-            Details
-          </button>
+
           <br />
-          <button onClick={salvarFilme} className="login-form-btn">
-            Favoritos
-          </button>
-        </CardActions>
+
+          <CardActions>
+            <button type="submit" className="login-form-btn">
+              Details
+            </button>
+            <button onClick={salvarFilme} className="login-form-btn">
+              +Favorites
+            </button>
+          </CardActions>
+        </CardContent>
+
       </Card>
     </div>
   );

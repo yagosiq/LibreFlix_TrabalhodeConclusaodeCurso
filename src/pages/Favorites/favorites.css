@@ -1,0 +1,20 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+.container-card {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background-color: #111;
+}
+.card {
+    width: 70%;
+    background-color: #333!important;
+    padding: 2rem;
+    border-radius: 1rem;
+}
