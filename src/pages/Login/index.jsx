@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import imgLogo from "../../componets/imgs/imgLogo.png";
 import { LayoutComponets } from "../../componets/LayoutComponets";
@@ -8,13 +9,14 @@ import { LayoutComponets } from "../../componets/LayoutComponets";
 export const Login = () => {
   const [email_user, setEmail_user] = useState("");
   const [pw_user, setPw_user] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     console.log(email_user, pw_user);
     event.preventDefault();
     await axios
       .post(
-        "https://recomenda-filmes.herokuapp.com/login",
+        "http://localhost:3333/login",
         JSON.stringify({
           email_user: email_user,
           pw_user: pw_user,
@@ -24,15 +26,13 @@ export const Login = () => {
         }
       )
       .then((response) => {
-        setEmail_user("")
-        setPw_user("")
-        console.log(response);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("email_user", email_user)
       })
       .catch(function (error) {
         console.log(error);
       });
-    
-    console.log("form submitted ✅");
+    navigate("/");
   };
 
   return (

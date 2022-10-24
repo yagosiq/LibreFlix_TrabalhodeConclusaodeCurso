@@ -12,45 +12,96 @@ import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import imgLogo from "../../componets/imgs/imgLogo.png";
+import { useNavigate } from "react-router-dom";
 
 export const MenuAppBar = () => {
-  const [auth, setAuth] = React.useState(true);
+  const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (localStorage.getItem("token")) handleChange(true);
+  }, [auth]);
 
   const handleChange = (event) => {
-    setAuth(event.target.checked);
+    setAuth(event);
   };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload(false);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  const handleLoginRoute = () => {
+    navigate("/login");
+  };
+
+  const handleRegisterRoute = () => {
+    navigate("/register");
+  };
+
+  const handleListRoute = () => {
+    navigate("/list");
+  };
+
+  const handleDefaultRoute = () => {
+    navigate("/");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup> */}
       <AppBar position="static" style={{ background: "#333" }}>
         <Toolbar>
-          <span className="login-form-title">
-              <img src={imgLogo} alt="Jovem Programador" />
-            </span>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          </Typography>
+          <span onClick={handleDefaultRoute} className="login-form-title">
+            <img src={imgLogo} alt="Jovem Programador" />
+          </span>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          ></Typography>
           {auth && (
+            <div>
+              Welcome, {localStorage.getItem("email_user")}
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleListRoute}>Lists</MenuItem>
+                <MenuItem onClick={handleLogout}>Exit</MenuItem>
+              </Menu>
+            </div>
+          )}
+          {!auth && (
             <div>
               <IconButton
                 size="large"
@@ -77,8 +128,8 @@ export const MenuAppBar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleLoginRoute}>Sign in</MenuItem>
+                <MenuItem onClick={handleRegisterRoute}>Register</MenuItem>
               </Menu>
             </div>
           )}
