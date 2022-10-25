@@ -11,18 +11,17 @@ import { MainPage } from "../pages/MainPage/MainPage";
 import { ListPage } from "../pages/MainPage/ListPage";
 
 export const AppRouter = () => {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"))
+    if(!token) setToken(localStorage.getItem("token"))
   }, [token]);
 
-  console.log(localStorage.getItem("token"));
   if (!token) {
     return (
       <Router>
         <Routes>
-          <Route path="/login" element={<Login/>} />
+          <Route path="/login" element={<Login setToken={setToken}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<MainPage />} />
           <Route path="*" element={<Navigate to="/" />} />
@@ -33,8 +32,8 @@ export const AppRouter = () => {
     return (
       <Router>
         <Routes>
-          <Route path="/" element={<MainPage />} />
           <Route path="/list" element={<ListPage/>} />
+          <Route path="/" element={<MainPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

@@ -14,7 +14,7 @@ import Menu from "@mui/material/Menu";
 import imgLogo from "../../componets/imgs/imgLogo.png";
 import { useNavigate } from "react-router-dom";
 
-export const MenuAppBar = () => {
+export const MenuAppBar = (props) => {
   const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
@@ -34,6 +34,7 @@ export const MenuAppBar = () => {
   const handleLogout = () => {
     localStorage.clear();
     window.location.reload(false);
+    navigate("/login");
   };
 
   const handleClose = () => {
@@ -49,6 +50,7 @@ export const MenuAppBar = () => {
   };
 
   const handleListRoute = () => {
+    console.log(localStorage.getItem("token"))
     navigate("/list");
   };
 
@@ -96,7 +98,7 @@ export const MenuAppBar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleListRoute}>Lists</MenuItem>
+                <MenuItem onClick={handleListRoute}>Your list</MenuItem>
                 <MenuItem onClick={handleLogout}>Exit</MenuItem>
               </Menu>
             </div>

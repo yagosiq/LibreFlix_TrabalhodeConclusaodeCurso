@@ -2,6 +2,7 @@ import { MainList } from ".";
 import Grid from "@mui/material/Grid";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import CircularIndeterminate from "../MainCard/loading";
 
 export const GridList = () => {
   const [lists, setLists] = useState([]);
@@ -13,10 +14,9 @@ export const GridList = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         handleSetList(res.data.list);
       });
-  }, [lists]);
+  });
 
   const handleSetList = (list) => {
     if (lists.length === 0) setLists({ ...list });
@@ -28,6 +28,12 @@ export const GridList = () => {
         <Grid item xs={12} color="white">
           <h1>Your list</h1>
         </Grid>
+        {
+          lists.length === 0 &&
+            <Grid item xs={12} align="center">
+              <CircularIndeterminate />
+            </Grid>
+        }
         {Object.values(lists).map((list, i) => {
           return (
             <Grid item xs={3}>

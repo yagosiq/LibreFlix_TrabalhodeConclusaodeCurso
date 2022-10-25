@@ -6,7 +6,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
 export const MainList = (props) => {
-  console.log(props.list_data)
   return (
     <div>
       <Card sx={{ maxWidth: 500, backgroundColor: "#111" }}>

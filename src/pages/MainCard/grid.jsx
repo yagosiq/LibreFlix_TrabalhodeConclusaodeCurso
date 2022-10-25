@@ -31,7 +31,6 @@ export const GridMovie = () => {
         { headers: { "Content-Type": "application/json" } }
       )
       .then((res) => {
-        console.log(res);
         if (res) {
           setMovies(res.data.movies_info);
         }
@@ -69,6 +68,13 @@ export const GridMovie = () => {
             </button>
           </div>
         </Grid>
+        {
+          movies && wanted_movie && (
+            <Grid item xs={12} color="white">
+              Results for: {wanted_movie}
+            </Grid>
+          )
+        }
         {
           movies.length === 0 &&
             <Grid item xs={12} align="center">

@@ -6,19 +6,49 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 export const MainCard = (props) => {
+  console.log(props.movie_data.movie_info.id_program)
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
 
+  const notify = (msg) => toast(msg);
+
+  const handleAddMovieToList = async () => {
+    await axios
+      .post(
+        "http://localhost:3333/list",
+        JSON.stringify({
+          "id_movie": props.movie_data.movie_info.id_program
+        }),
+        {
+          headers: {
+            "authorization": "bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json"
+          }
+        }
+      )
+      .then((response) => {
+        console.log(response.data)
+        notify(response.data.message)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   const style = {
     position: "absolute",
     top: "50%",
+    color: "white",
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: "background.paper",
+    bgcolor: "black",
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
@@ -52,6 +82,10 @@ export const MainCard = (props) => {
           <button type="button" onClick={handleOpen} className="login-form-btn">
             Details
           </button>
+          <button type="button" onClick={handleAddMovieToList} className="login-form-btn">
+            Add to list
+            <ToastContainer theme="dark" position="bottom-right"/>
+          </button>
         </CardActions>
       </Card>
       {open && (
@@ -67,7 +101,8 @@ export const MainCard = (props) => {
                 {props.movie_data.movie_info.series_title}
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                <h3>Description:</h3>
+                <p>{props.movie_data.movie_info.overview}</p>
               </Typography>
             </Box>
           </Modal>

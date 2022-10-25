@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import imgLogo from "../../componets/imgs/imgLogo.png";
 import { LayoutComponets } from "../../componets/LayoutComponets";
 
-export const Login = () => {
+export const Login = (props) => {
   const [email_user, setEmail_user] = useState("");
   const [pw_user, setPw_user] = useState("");
   const navigate = useNavigate();
@@ -28,11 +28,12 @@ export const Login = () => {
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("email_user", email_user)
+        props.setToken(response.data.token)
+        navigate("/");
       })
       .catch(function (error) {
         console.log(error);
       });
-    navigate("/");
   };
 
   return (
