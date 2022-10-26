@@ -50,7 +50,6 @@ export const MenuAppBar = (props) => {
   };
 
   const handleListRoute = () => {
-    console.log(localStorage.getItem("token"))
     navigate("/list");
   };
 
@@ -60,7 +59,7 @@ export const MenuAppBar = (props) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ background: "#333" }}>
+      <AppBar position="fixed" style={{ background: "#333" }}>
         <Toolbar>
           <span onClick={handleDefaultRoute} className="login-form-title">
             <img src={imgLogo} alt="Jovem Programador" />

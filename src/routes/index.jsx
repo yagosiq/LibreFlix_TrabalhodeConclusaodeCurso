@@ -17,7 +17,7 @@ export const AppRouter = () => {
     if(!token) setToken(localStorage.getItem("token"))
   }, [token]);
 
-  if (!token) {
+  if (!token || !localStorage.getItem("token")) {
     return (
       <Router>
         <Routes>
