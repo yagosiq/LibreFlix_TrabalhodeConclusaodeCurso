@@ -71,7 +71,7 @@ export const MenuAppBar = (props) => {
           ></Typography>
           {auth && (
             <div>
-              Welcome, {localStorage.getItem("email_user")}
+              Bem-vindo, {localStorage.getItem("email_user")}
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -97,8 +97,8 @@ export const MenuAppBar = (props) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleListRoute}>Your list</MenuItem>
-                <MenuItem onClick={handleLogout}>Exit</MenuItem>
+                <MenuItem onClick={handleListRoute}>Minha lista</MenuItem>
+                <MenuItem onClick={handleLogout}>Sair</MenuItem>
               </Menu>
             </div>
           )}
@@ -129,8 +129,8 @@ export const MenuAppBar = (props) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleLoginRoute}>Sign in</MenuItem>
-                <MenuItem onClick={handleRegisterRoute}>Register</MenuItem>
+                <MenuItem onClick={handleLoginRoute}>Entrar</MenuItem>
+                <MenuItem onClick={handleRegisterRoute}>Registre-se</MenuItem>
               </Menu>
             </div>
           )}

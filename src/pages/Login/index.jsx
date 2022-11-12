@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import imgLogo from "../../componets/imgs/imgLogo.png";
 import { LayoutComponets } from "../../componets/LayoutComponets";
+import { MenuAppBar } from "../../componets/MenuAppBar";
 
 export const Login = (props) => {
   const [email_user, setEmail_user] = useState("");
@@ -38,6 +39,7 @@ export const Login = (props) => {
 
   return (
     <LayoutComponets>
+      <MenuAppBar />
       <form className="login-form" onSubmit={handleSubmit}>
         <span className="login-form-title"> Bem-vindo ao</span>
 

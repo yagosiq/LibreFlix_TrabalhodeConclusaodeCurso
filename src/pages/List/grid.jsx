@@ -41,7 +41,7 @@ export const GridList = () => {
       <ToastContainer theme="dark" position="bottom-right"/>
       <Grid container spacing={3} align="center">
         <Grid item xs={12} color="white">
-          <h1>Your list</h1>
+          <h1>Minha lista</h1>
         </Grid>
         {lists.length === 0 && (
           <Grid item xs={12} align="center">

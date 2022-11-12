@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 export const MainCard = (props) => {
-  console.log(props.movie_data.movie_info.id_program)
+  console.log(props.movie_data.movie_info.id_program);
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
@@ -23,23 +23,23 @@ export const MainCard = (props) => {
       .post(
         "http://localhost:3333/list",
         JSON.stringify({
-          "id_movie": props.movie_data.movie_info.id_program
+          id_movie: props.movie_data.movie_info.id_program,
         }),
         {
           headers: {
-            "authorization": "bearer " + localStorage.getItem("token"),
-            "Content-Type": "application/json"
-          }
+            authorization: "bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
         }
       )
       .then((response) => {
-        console.log(response.data)
-        notify(response.data.message)
+        console.log(response.data);
+        notify(response.data.message);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   const style = {
     position: "absolute",
@@ -80,12 +80,18 @@ export const MainCard = (props) => {
         </CardContent>
         <CardActions>
           <button type="button" onClick={handleOpen} className="login-form-btn">
-            Details
+            Detalhes
           </button>
-          <button type="button" onClick={handleAddMovieToList} className="login-form-btn">
-            Add to list
-            <ToastContainer theme="dark" position="bottom-right"/>
-          </button>
+          {localStorage.getItem("token") && (
+            <button
+              type="button"
+              onClick={handleAddMovieToList}
+              className="login-form-btn"
+            >
+              Listar
+              <ToastContainer theme="dark" position="bottom-right" />
+            </button>
+          )}
         </CardActions>
       </Card>
       {open && (
@@ -101,7 +107,7 @@ export const MainCard = (props) => {
                 {props.movie_data.movie_info.series_title}
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <h3>Description:</h3>
+                <h3>Descrição:</h3>
                 <p>{props.movie_data.movie_info.overview}</p>
               </Typography>
             </Box>

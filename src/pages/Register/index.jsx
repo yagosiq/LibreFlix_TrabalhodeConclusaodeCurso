@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { LayoutComponets } from "../../componets/LayoutComponets";
 
 import imgLogo from "../../componets/imgs/imgLogo.png";
+import { MenuAppBar } from "../../componets/MenuAppBar";
 
 export const Register = () => {
   const [email_user, setEmail_user] = useState("");
@@ -20,7 +21,7 @@ export const Register = () => {
     event.preventDefault();
     await axios
       .post(
-        "http://localhost:3333/login",
+        "http://localhost:3333/users",
         JSON.stringify({
           first_name: first_name,
           last_name: last_name,
@@ -45,6 +46,7 @@ export const Register = () => {
 
   return (
     <LayoutComponets>
+      <MenuAppBar />
       <form className="login-form" onSubmit={handleSubmit}>
         <span className="login-form-title"> Criar Conta</span>
 

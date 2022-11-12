@@ -6,24 +6,24 @@ import CircularIndeterminate from "./loading";
 
 export const GridMovie = () => {
   const [movies, setMovies] = useState([]);
+  const [movie, setMovie] = useState([]);
   const [wanted_movie, setWanted_movie] = useState("");
   useEffect(() => {
-    axios
-      .get("http://localhost:3333/cold_start", {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => {
-        localStorage.setItem("cold_start", res.data.movie_info);
-        handleSetMovies(res.data.movie_info);
-      });
-  }, [movies]);
-
-  const handleSetMovies = (movie) => {
-    if (movies.length === 0) setMovies({ ...movie });
-  };
+    if (movies.length === 0) {
+      axios
+        .get("http://localhost:3333/cold_start", {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((res) => {
+          localStorage.setItem("cold_start", res.data.movie_info);
+          setMovies(res.data.movie_info);
+        });
+    }
+  }, [wanted_movie]);
 
   const handleSearchMovie = async (wanted_movie) => {
-    setMovies("")
+    setMovies("");
+    setMovie("");
     await axios
       .post(
         "http://localhost:3333/content_based",
@@ -31,8 +31,10 @@ export const GridMovie = () => {
         { headers: { "Content-Type": "application/json" } }
       )
       .then((res) => {
+        console.log(res.data);
         if (res) {
-          setMovies(res.data.movies_info);
+          setMovies(res.data.rec.recommendation);
+          setMovie(res.data.rec.wanted_movie);
         }
       })
       .catch((err) => {
@@ -53,7 +55,7 @@ export const GridMovie = () => {
             />
             <span
               className="focus-input"
-              data-placeholder="Search for a movie"
+              data-placeholder="Buscar por um filme"
             ></span>
           </div>
         </Grid>
@@ -64,25 +66,25 @@ export const GridMovie = () => {
               className="login-form-btn"
               onClick={() => handleSearchMovie(wanted_movie)}
             >
-              Go
+              Buscar
             </button>
           </div>
         </Grid>
-        {
-          movies && wanted_movie && (
-            <Grid item xs={12} color="white">
-              Results for: {wanted_movie}
+        {movies.length === 0 && (
+          <Grid item xs={12} align="center">
+            <CircularIndeterminate />
+          </Grid>
+        )}
+        {Object.values(movie).map((m, i) => {
+          console.log(m);
+          return (
+            <Grid item xs={3}>
+              <MainCard movie_data={m} />
             </Grid>
-          )
-        }
-        {
-          movies.length === 0 &&
-            <Grid item xs={12} align="center">
-              <CircularIndeterminate />
-            </Grid>
-        }
+          );
+        })}
         {Object.values(movies).map((movie, i) => {
-          console.log(movie)
+          console.log(movie);
           return (
             <Grid item xs={3}>
               <MainCard movie_data={movie} />
