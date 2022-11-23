@@ -9,6 +9,7 @@ import React, { useState, useEffect } from "react";
 import { Register } from "../pages/Register";
 import { MainPage } from "../pages/MainPage/MainPage";
 import { ListPage } from "../pages/MainPage/ListPage";
+import { RecommendationPage } from "../pages/MainPage/RecommendationPage";
 
 export const AppRouter = () => {
   const [token, setToken] = useState(null);
@@ -33,6 +34,7 @@ export const AppRouter = () => {
       <Router>
         <Routes>
           <Route path="/list" element={<ListPage/>} />
+          <Route path="/recommendation" element={<RecommendationPage/>} />
           <Route path="/" element={<MainPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

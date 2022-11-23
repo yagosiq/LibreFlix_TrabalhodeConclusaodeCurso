@@ -16,6 +16,7 @@ export const GridMovie = () => {
         })
         .then((res) => {
           localStorage.setItem("cold_start", res.data.movie_info);
+          console.log(res.data.movie_info)
           setMovies(res.data.movie_info);
         });
     }
@@ -31,7 +32,6 @@ export const GridMovie = () => {
         { headers: { "Content-Type": "application/json" } }
       )
       .then((res) => {
-        console.log(res.data);
         if (res) {
           setMovies(res.data.rec.recommendation);
           setMovie(res.data.rec.wanted_movie);
@@ -76,7 +76,6 @@ export const GridMovie = () => {
           </Grid>
         )}
         {Object.values(movie).map((m, i) => {
-          console.log(m);
           return (
             <Grid item xs={3}>
               <MainCard movie_data={m} />
@@ -84,7 +83,6 @@ export const GridMovie = () => {
           );
         })}
         {Object.values(movies).map((movie, i) => {
-          console.log(movie);
           return (
             <Grid item xs={3}>
               <MainCard movie_data={movie} />

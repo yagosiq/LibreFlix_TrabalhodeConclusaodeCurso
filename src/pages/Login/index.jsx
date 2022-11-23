@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import imgLogo from "../../componets/imgs/imgLogo.png";
 import { LayoutComponets } from "../../componets/LayoutComponets";
@@ -11,9 +12,9 @@ export const Login = (props) => {
   const [email_user, setEmail_user] = useState("");
   const [pw_user, setPw_user] = useState("");
   const navigate = useNavigate();
+  const [login, setLogin] = useState(false);
 
   const handleSubmit = async (event) => {
-    console.log(email_user, pw_user);
     event.preventDefault();
     await axios
       .post(
@@ -34,11 +35,19 @@ export const Login = (props) => {
       })
       .catch(function (error) {
         console.log(error);
+        handleNotify()
       });
   };
 
+  const handleNotify = () => {
+    notify()
+  }
+
+  const notify = () => toast('E-mail ou senha inválidos');
+
   return (
     <LayoutComponets>
+      <ToastContainer theme="dark" position="bottom-right"/>
       <MenuAppBar />
       <form className="login-form" onSubmit={handleSubmit}>
         <span className="login-form-title"> Bem-vindo ao</span>

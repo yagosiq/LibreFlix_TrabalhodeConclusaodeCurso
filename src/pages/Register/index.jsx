@@ -17,7 +17,6 @@ export const Register = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
-    console.log(email_user, pw_user);
     event.preventDefault();
     await axios
       .post(
@@ -35,7 +34,6 @@ export const Register = () => {
         }
       )
       .then((response) => {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);

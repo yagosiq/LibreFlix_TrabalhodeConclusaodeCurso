@@ -53,6 +53,10 @@ export const MenuAppBar = (props) => {
     navigate("/list");
   };
 
+  const handleRecRoute = () => {
+    navigate("/recommendation");
+  };
+
   const handleDefaultRoute = () => {
     navigate("/");
   };
@@ -98,6 +102,7 @@ export const MenuAppBar = (props) => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleListRoute}>Minha lista</MenuItem>
+                <MenuItem onClick={handleRecRoute}>Recomendados para mim</MenuItem>
                 <MenuItem onClick={handleLogout}>Sair</MenuItem>
               </Menu>
             </div>
